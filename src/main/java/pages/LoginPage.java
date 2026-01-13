@@ -3,6 +3,8 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import utilis.Log;
+
 public class LoginPage {
 	private WebDriver driver;
 	private By usernameFiled= By.name("user-name");
@@ -23,6 +25,7 @@ public class LoginPage {
 	}
 	public void clickLogin()
 	{
+		Log.info("Clicking Login Button..");
 		driver.findElement(loginButton).click();
 	}
 

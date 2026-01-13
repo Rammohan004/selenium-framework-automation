@@ -10,13 +10,16 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import utilis.Log;
+
+
 public class BaseTest {
 	protected WebDriver driver;
 	protected ChromeOptions options;
 
 	@BeforeMethod
 	public void setUp() {
-
+		Log.info("Starting WebDriver...");
 		options = new ChromeOptions();
 
 		Map<String, Object> prefs = new HashMap<>();
@@ -30,14 +33,15 @@ public class BaseTest {
 		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-
+		Log.info("Navitaging to URL...");
 		driver.get("https://www.saucedemo.com/");
 	}
 
 	@AfterMethod
 	public void tearDown() {
 		if (driver != null) {
-		//	driver.quit();
+			Log.info("Closing the Browser....");
+			driver.quit();
 		}
 	}
 
