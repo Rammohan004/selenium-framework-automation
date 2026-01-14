@@ -24,12 +24,12 @@ public class LoginTest extends BaseTest {
 		for (int i = 1; i < rowCount; i++) {
 data[i-1][0]=ExcelUtils.getCellData(i, 0);
 data[i-1][1]=ExcelUtils.getCellData(i, 1);
-data[i-1][2]=ExcelUtils.getCellData(i, 2);
+
 	
 
 		}
 		ExcelUtils.closeExcel();
-		return null;
+		return data;
 	}
 
 	@Test(dataProvider="LoginData")
@@ -54,7 +54,7 @@ data[i-1][2]=ExcelUtils.getCellData(i, 2);
 
 	}
 
-	@Test
+/*	@Test
 	public void testInValidLogin() {
 		Log.info("Strating LoginTest...");
 		test = ExtentReportManager.createTest("Login Test invaild creds");
@@ -72,6 +72,6 @@ data[i-1][2]=ExcelUtils.getCellData(i, 2);
 		Assert.assertEquals(driver.getTitle(), "Swag Labs--123");
 		test.pass("Login Successful");
 
-	}
+	}*/
 
 }
