@@ -6,12 +6,13 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.beust.jcommander.Parameter;
+
 import base.BaseTest;
-import lombok.Data;
+import pages.LoginPage;
 import utilis.ExcelUtils;
 import utilis.ExtentReportManager;
 import utilis.Log;
-import pages.LoginPage;
 
 
 public class LoginTest extends BaseTest {
@@ -31,11 +32,22 @@ data[i-1][1]=ExcelUtils.getCellData(i, 1);
 		ExcelUtils.closeExcel();
 		return data;
 	}
+	@DataProvider(name="LoginData2")
+	public Object[][] getData()
+	{
+		return new Object[][]{
+		{"user1","pass1"},
+		{"user2","pass2"},
+		{"user3","pass3"}
+	};
+	}
 
-	@Test(dataProvider="LoginData")
+	@Test(dataProvider="LoginData2")
+	//@Test
+	//@Parameter({"username","password"})
 	public void testValidLogin(String username,String password) {
 		Log.info("Strating LoginTest...");
-		test = ExtentReportManager.createTest("Login Test with valid creds");
+		test = ExtentReportManager.createTest("Login Test "+username);
 		test.info("Navigating to URL..");
 		LoginPage logingPage = new LoginPage(driver);
 		Log.info("Adding Creds....");
