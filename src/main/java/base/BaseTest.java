@@ -23,6 +23,7 @@ public class BaseTest {
 	protected WebDriver driver;
 	protected ChromeOptions options;
 	protected static ExtentReports extent;
+	protected  ExtentTest test;
 	
 	@BeforeSuite
 	public void setUPReport()
