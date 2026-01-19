@@ -1,4 +1,5 @@
 package utilis;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,47 +15,47 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 public class ExtentReportManager {
 
-    private static ExtentReports extent;
-    private static ExtentTest test;
+	private static ExtentReports extent;
+	private static ExtentTest test;
+	public static String reportPath;
 
-    	public static ExtentReports getReportInstance() {
-    		
-    		if(extent==null) {
-    			
-    			String timestamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
-    			String reportPath = "reports/ExtentReport_"+timestamp+".html";
-    			ExtentSparkReporter reporter = new ExtentSparkReporter(reportPath);
-    			
-    			reporter.config().setDocumentTitle("Automation Test Report");
-    			reporter.config().setReportName("Test Execution Report");
-    			
-    			extent = new ExtentReports();
-    			extent.attachReporter(reporter);
-    		}
-    		
-    		return extent;
-    	}
-    	
-    	public static ExtentTest createTest(String testName) {
-    		
-    		test = getReportInstance().createTest(testName);
-    		return test;
-    	}
-    	public static String captureScreenshot(WebDriver driver,String screenshotName) {
-    		try {
-    			File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-    			String path=System.getProperty("user.dir")+"/screenshot/"+screenshotName+".png";
-    			System.out.println("path for screenshot is:"+ path);
-    			FileUtils.copyFile(src, new File(path));
-    			return path;
-    			
-    		}
-    		catch(Exception e){
-    			e.printStackTrace();
-    			return null;
-    			
-    			
-    		}
-			
-    	}
-    }
+	public static ExtentReports getReportInstance() {
+
+		if (extent == null) {
+
+			String timestamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
+			reportPath = "reports/ExtentReport_" + timestamp + ".html";
+			ExtentSparkReporter reporter = new ExtentSparkReporter(reportPath);
+
+			reporter.config().setDocumentTitle("Automation Test Report");
+			reporter.config().setReportName("Test Execution Report");
+
+			extent = new ExtentReports();
+			extent.attachReporter(reporter);
+		}
+
+		return extent;
+	}
+
+	public static ExtentTest createTest(String testName) {
+
+		test = getReportInstance().createTest(testName);
+		return test;
+	}
+
+	public static String captureScreenshot(WebDriver driver, String screenshotName) {
+		try {
+			File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			String path = System.getProperty("user.dir") + "/screenshot/" + screenshotName + ".png";
+			System.out.println("path for screenshot is:" + path);
+			FileUtils.copyFile(src, new File(path));
+			return path;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+
+		}
+
+	}
+}
